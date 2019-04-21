@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studentNS">
+
+    <resultMap id="studentResultMap" type="Student">
+        <id property="st_number" column="st_number"/>
+        <result property="st_name" column="st_name"/>
+        <result property="st_password" column="st_password"/>
+        <result property="st_lastdate" column="st_lastdate"/>
+    </resultMap>
+    <!--更新最后一次登陆日期-->
+    <update id="doUpdateLastDate" parameterType="Student">
+        UPDATE student SET st_lastdate=#{st_lastdate} WHERE st_number = #{st_number}
+    </update>
+    <!--实现登录查询操作-->
+    <select id="findLogin" parameterType="Student" resultType="Student">
+        SELECT st_number,st_lastdate,st_name FROM student WHERE st_number = #{st_number} AND st_password = #{st_password}
+    </select>
+    <!--实现数据的增加-->
+    <insert id="doCreate" parameterType="Student">
+        INSERT INTO student(st_number,st_name,st_password,st_lastdate) VALUES (#{st_number},#{st_name},#{st_password},#{st_lastdate})
+    </insert>
+    <!--查询学生账号名称-->
+    <select id="findById" parameterType="String" resultMap="studentResultMap">
+        SELECT st_name,st_number,st_lastdate FROM student WHERE st_number=#{st_number}
+    </select>
+    <!--查询全部数据-->
+    <select id="findAll" parameterType="java.util.List" resultMap="studentResultMap">
+        SELECT st_name,st_number,st_lastdate FROM student
+    </select>
+    <update id="doUpdateStuInfo" parameterType="Student">
+        UPDATE student SET st_name=#{st_name},st_password=#{st_password},st_number=#{st_number} WHERE st_number = #{old_st_number}
+    </update>
+    <delete id="doremove" parameterType="String">
+        DELETE FROM student WHERE st_number = #{st_number}
+    </delete>
+    <select id="search" parameterType="String" resultMap="studentResultMap">
+        SELECT st_name,st_number,st_lastdate FROM student WHERE st_number=#{st_number}
+    </select>
+</mapper>

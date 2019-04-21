@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--配置别名-->
+    <typeAliases>
+        <typeAlias type="cn.edu.nchu.student.vo.Admin" alias="Admin"/>
+        <typeAlias type="cn.edu.nchu.student.vo.Student" alias="Student"/>
+        <typeAlias type="cn.edu.nchu.student.vo.activity.Yuandan" alias="Yuandan"/>
+        <typeAlias type="cn.edu.nchu.student.vo.activity.Sanxiao" alias="Sanxiao"/>
+        <typeAlias type="cn.edu.nchu.student.vo.Notice" alias="Notice"/>
+        <typeAlias type="cn.edu.nchu.student.vo.Board" alias="Board"/>
+        <typeAlias type="cn.edu.nchu.student.vo.afterclass.Volunteer" alias="Volunteer"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mapper/adminMapper.xml"/>
+        <mapper resource="mapper/studentMapper.xml"/>
+        <mapper resource="mapper/activity/yuandanMapper.xml"/>
+        <mapper resource="mapper/activity/sanxiaoMapper.xml"/>
+        <mapper resource="mapper/noticeMapper.xml"/>
+        <mapper resource="mapper/boardMapper.xml"/>
+        <mapper resource="mapper/afterclass/volunteerMapper.xml"/>
+    </mappers>
+</configuration>

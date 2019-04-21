@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminNS">
+
+    <resultMap id="adminResultMap" type="Admin">
+        <id property="number" column="ad_number"></id>
+        <result property="password" column="ad_password"></result>
+        <result property="lastdate" column="ad_lastdate"></result>
+        <result property="board" column="board"></result>
+    </resultMap>
+    <!--更新最后一次登陆日期-->
+    <update id="doUpdateLastDate" parameterType="Admin">
+        UPDATE super_admin SET ad_lastdate=#{ad_lastdate} WHERE ad_number = #{ad_number}
+    </update>
+    <!--实现登录查询操作-->
+    <select id="findLogin" parameterType="Admin" resultType="Admin">
+        SELECT ad_number,ad_lastdate,ad_name FROM super_admin WHERE ad_number = #{ad_number} AND ad_password = #{ad_password}
+    </select>
+</mapper>

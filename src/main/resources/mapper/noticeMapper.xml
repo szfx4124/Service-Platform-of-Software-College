@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeNS">
+
+    <resultMap id="noticeResultMap" type="Notice">
+        <id property="title" column="title"/>
+        <result property="time" column="time"/>
+        <result property="name" column="name"/>
+        <result property="file" column="file"/>
+    </resultMap>
+    <!--实现数据的增加-->
+    <insert id="doCreate" parameterType="Notice">
+        INSERT INTO notice(title,time,name,file) VALUES (#{title},#{time},#{name},#{file})
+    </insert>
+
+    <select id="findAll" parameterType="java.util.List" resultMap="noticeResultMap">
+        SELECT title,time,name,file FROM notice
+    </select>
+    <update id="doUpdateStuInfo" parameterType="Notice">
+        UPDATE notice SET title=#{title},time=#{time},name=#{name} WHERE title = #{old_title}
+    </update>
+    <delete id="doremove" parameterType="String">
+        DELETE FROM notice WHERE title = #{title}
+    </delete>
+    <select id="findById" parameterType="String" resultMap="noticeResultMap">
+        SELECT title,time,name,file FROM notice WHERE title=#{title}
+    </select>
+</mapper>

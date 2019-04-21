@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yuandanNS">
+
+    <resultMap id="yuandanResultMap" type="Yuandan">
+        <id property="st_number" column="st_number"/>
+        <result property="st_name" column="st_name"/>
+        <result property="name" column="name"/>
+        <result property="team" column="team"/>
+        <result property="other" column="other"/>
+        <result property="message" column="message"/>
+    </resultMap>
+    <!--实现数据的增加-->
+    <insert id="doCreate" parameterType="Yuandan">
+        INSERT INTO yuandan(st_number,st_name,name,team,other,message) VALUES (#{st_number},#{st_name},#{name},#{team},#{other},#{message})
+    </insert>
+    <!--查询学生账号名称-->
+    <select id="findById" parameterType="String" resultMap="yuandanResultMap">
+        SELECT st_name,name,team,other,message FROM yuandan WHERE st_number=#{st_number}
+    </select>
+    <!--查询全部数据-->
+    <select id="findAll" parameterType="java.util.List" resultMap="yuandanResultMap">
+        SELECT st_number,st_name,name,team,other,message FROM yuandan
+    </select>
+    <delete id="doremove" parameterType="String">
+        DELETE FROM yuandan WHERE st_number = #{st_number}
+    </delete>
+</mapper>
